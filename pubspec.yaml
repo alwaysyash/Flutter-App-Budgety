@@ -50,10 +50,10 @@ dev_dependencies:
   flutter_native_splash: ^2.2.5
 
 flutter_native_splash:
-  color: "##212121"
+  color: "#293335"
   image: assets/logo.png
   android_12:
-    color: "##212121"
+    color: "#293335"
     image: assets/logo.png
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
