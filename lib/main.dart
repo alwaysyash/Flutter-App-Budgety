@@ -1,8 +1,6 @@
 import './widgets/user_transactions.dart';
 import 'package:flutter/material.dart';
 
-import 'package:intl/intl.dart';
-
 void main() {
   runApp(MyApp());
 }
@@ -26,8 +24,8 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.teal,
             foregroundColor: Colors.black54,
             shadowColor: Colors.black12,
-
-            title: const Text(
+            
+            title:  const Text(
               'Budget Tracker',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
