@@ -46,7 +46,8 @@ class TransactionList extends StatelessWidget {
                 decoration: BoxDecoration(
                   border: Border.all(
                     // color: const Color.fromARGB(255, 121, 187, 180),
-                    color: Colors.tealAccent,
+                    color: Colors.teal,
+                    // color: Theme.of(context).primaryColor,
                     width: 2,
                   ),
                 ),
@@ -58,7 +59,7 @@ class TransactionList extends StatelessWidget {
                   'Rs. ${transactions[index].amount}', //transactions was previously tx 'Rs. ${tx.amount}'
                   //index is argument provided by flutter. Used to render the specific number of list
                   style: const TextStyle(
-                    fontWeight: FontWeight.bold,
+                    // fontWeight: FontWeight.bold,
                     fontSize: 18,
                     color: Colors.tealAccent,
                   ),

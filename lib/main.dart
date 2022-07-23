@@ -1,18 +1,78 @@
-import './widgets/user_transactions.dart';
+import 'package:flutter/gestures.dart';
+
+import './widgets/new_transaction.dart';
+import './widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
+import './models/transaction.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(App());
 }
 
-class MyApp extends StatelessWidget {
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.teal,
+      ),
+      home: MyApp(),
+    );
+  }
+}
+
+// ignore: use_key_in_widget_constructors
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // late String titleInput;
-  // late String amountInput;
+  final List<Transaction> _userTransaction = [
+    Transaction(
+      id: 't1',
+      title: 'Shoes',
+      amount: 5000,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Jacket',
+      amount: 2000,
+      date: DateTime.now(),
+    ),
+  ];
 
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
+  void _addNewTransaction(String txTitle, double txAmount) {
+    final newTx = Transaction(
+      title: txTitle,
+      amount: txAmount,
+      date: DateTime.now(),
+      id: DateTime.now().toString(),
+    );
 
-  MyApp({Key? key}) : super(key: key);
+    setState(() {
+      //here _userTransaction is final i.e. only address is final
+      _userTransaction.add(newTx);
+    });
+  }
+
+  void _startAddNew(BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return GestureDetector(
+          onTap: () {},
+          behavior: HitTestBehavior.opaque,
+          child: NewTransaction(_addNewTransaction),
+        ); //pass the pointer of function
+      },
+      backgroundColor: const Color.fromARGB(255, 80, 80, 80),
+    );
+  }
 
   // This widget is the root of your application.
   @override
@@ -49,14 +109,16 @@ class MyApp extends StatelessWidget {
           // ),
 
           actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.add_circle_outline_outlined,
-                size: 26,
-                color: Colors.black,
+            Builder(
+              builder: (context) => IconButton(
+                onPressed: () => _startAddNew(context),
+                icon: const Icon(
+                  Icons.add_circle_outline_outlined,
+                  size: 26,
+                  color: Colors.black,
+                ),
               ),
-            )
+            ),
           ],
         ),
         backgroundColor: const Color.fromARGB(255, 33, 33, 33),
@@ -82,16 +144,18 @@ class MyApp extends StatelessWidget {
                 ),
               ),
 
-              const UserTransactions(),
+              TransactionList(_userTransaction),
             ],
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: Colors.teal,
-          foregroundColor: Colors.black87,
-          child: const Icon(Icons.add),
+        floatingActionButton: Builder(
+          builder: (context) => FloatingActionButton(
+            onPressed: () => _startAddNew(context),
+            backgroundColor: Colors.teal,
+            foregroundColor: Colors.black87,
+            child: const Icon(Icons.add),
+          ),
         ),
       ),
     );
