@@ -25,10 +25,39 @@ class MyApp extends StatelessWidget {
           foregroundColor: Colors.black54,
           shadowColor: Colors.black12,
 
-          title: const Text(
-            'Budget Tracker',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          // title: Container(
+          //   padding: const EdgeInsets.all(8),
+          //   child: Image.asset(
+          //     'assets/appbar.png',
+          //     fit: BoxFit.contain,
+          //   ),
+          // ),
+          centerTitle: false,
+          title: SizedBox(
+            height: 50,
+            width: 150,
+            child: Image.asset(
+              'assets/appbar.png',
+              fit: BoxFit.fill,
+            ),
           ),
+          leadingWidth: 0,
+
+          //const Text(
+          //   'Budget Tracker',
+          //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          // ),
+
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.add_circle_outline_outlined,
+                size: 26,
+                color: Colors.black,
+              ),
+            )
+          ],
         ),
         backgroundColor: const Color.fromARGB(255, 33, 33, 33),
         body: SingleChildScrollView(
@@ -56,6 +85,13 @@ class MyApp extends StatelessWidget {
               const UserTransactions(),
             ],
           ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: Colors.teal,
+          foregroundColor: Colors.black87,
+          child: const Icon(Icons.add),
         ),
       ),
     );
