@@ -8,6 +8,18 @@ class NewTransaction extends StatelessWidget {
   // ignore: use_key_in_widget_constructors
   NewTransaction(this.addTx);
 
+  void submitData() {
+    final enteredTitle = titleController.text;
+    final enteredAmount = double.parse(amountController.text);
+    if (enteredTitle.isEmpty || enteredAmount < 0) {
+      return;
+    }
+    addTx(
+      enteredTitle,
+      enteredAmount,
+    ); //call function from, user_transactions
+  }
+
   final titleController = TextEditingController();
   final amountController = TextEditingController();
   @override
@@ -33,6 +45,9 @@ class NewTransaction extends StatelessWidget {
               // onChanged: (val) {
               //   titleInput = val;
               // },
+              onSubmitted: (_) => submitData(),
+              //as this is anonymous function we need to call the function only reference is not enough
+              //to onSubmitted reference to anonymous function is passed
             ),
             TextField(
               style: const TextStyle(color: Colors.white),
@@ -44,15 +59,15 @@ class NewTransaction extends StatelessWidget {
                 ),
               ),
               controller: amountController,
+              onSubmitted: (_) =>
+                  submitData(), //onSubmitted gives a string value. We dont use it but need to accept it '_'
               // onChanged: (val) {
               //   amountInput = val;
               // },
+              keyboardType: TextInputType.number,
             ),
             TextButton(
-              onPressed: () {
-                addTx(
-                    titleController.text, double.parse(amountController.text));
-              },
+              onPressed: submitData,
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all(Colors.tealAccent),
               ),

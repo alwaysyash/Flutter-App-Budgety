@@ -19,19 +19,23 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          appBar: AppBar(
-            // backgroundColor: const Color.fromARGB(255, 0, 97, 89),
-            backgroundColor: Colors.teal,
-            foregroundColor: Colors.black54,
-            shadowColor: Colors.black12,
-            
-            title:  const Text(
-              'Budget Tracker',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
+        appBar: AppBar(
+          // backgroundColor: const Color.fromARGB(255, 0, 97, 89),
+          backgroundColor: Colors.teal,
+          foregroundColor: Colors.black54,
+          shadowColor: Colors.black12,
+
+          title: const Text(
+            'Budget Tracker',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
-          backgroundColor: const Color.fromARGB(255, 33, 33, 33),
-          body: Column(
+        ),
+        backgroundColor: const Color.fromARGB(255, 33, 33, 33),
+        body: SingleChildScrollView(
+          //for keyboard warning
+          //can be only added at body level because
+          //it cant determine its size directly so it takes whole body as scrollable
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -51,7 +55,9 @@ class MyApp extends StatelessWidget {
 
               const UserTransactions(),
             ],
-          )),
+          ),
+        ),
+      ),
     );
   }
 }
