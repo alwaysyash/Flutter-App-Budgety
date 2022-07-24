@@ -34,6 +34,12 @@ class ChartBar extends StatelessWidget {
                   border: Border.all(color: Colors.grey, width: 1.0),
                   color: Colors.grey,
                   borderRadius: BorderRadius.circular(10),
+                  boxShadow: const [
+                    BoxShadow(
+                        color: Color.fromARGB(50, 0, 0, 0),
+                        spreadRadius: 4,
+                        blurRadius: 8),
+                  ],
                 ),
               ),
               FractionallySizedBox(

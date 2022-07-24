@@ -62,36 +62,46 @@ class TransactionList extends StatelessWidget {
               itemBuilder: (context, index) {
                 //index is index of item to be rendered
 
+//===========================================================================================================
+
                 return Card(
                   // ignore: prefer_const_constructors
-                  margin: EdgeInsets.all(10),
+                  elevation: 10,
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                   color: const Color.fromARGB(255, 80, 80, 80),
                   shadowColor: Colors.black,
                   child: Row(children: [
                     // ignore: avoid_unnecessary_containers
                     Container(
+                      width: 110,
                       margin: const EdgeInsets.symmetric(
                           vertical: 10, horizontal: 15),
                       decoration: BoxDecoration(
-                        border: Border.all(
-                          // color: const Color.fromARGB(255, 121, 187, 180),
-                          color: Colors.teal,
-                          // color: Theme.of(context).primaryColor,
-                          width: 2,
-                        ),
+                        color: Colors.teal,
+                        borderRadius: BorderRadius.circular(6),
+                        boxShadow: const [
+                          BoxShadow(
+                              color: Color.fromARGB(44, 0, 0, 0),
+                              spreadRadius: 2,
+                              blurRadius: 6),
+                        ],
                       ),
                       padding: const EdgeInsets.all(10),
-                      child: Text(
-                        // tx.amount.toString(),
-                        // (string interpolation) after $ sign we can reference variable or property name
-                        //This is used to concatenate string (string interpolation)
-                        'Rs. ${transactions[index].amount}', //transactions was previously tx 'Rs. ${tx.amount}'
-                        //index is argument provided by flutter. Used to render the specific number of list
-                        style: const TextStyle(
-                          // fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Colors.tealAccent,
-                          fontFamily: 'Quicksand',
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          // tx.amount.toString(),
+                          // (string interpolation) after $ sign we can reference variable or property name
+                          //This is used to concatenate string (string interpolation)
+                          'Rs. ${transactions[index].amount}', //transactions was previously tx 'Rs. ${tx.amount}'
+                          //index is argument provided by flutter. Used to render the specific number of list
+                          style: const TextStyle(
+                            // fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: Color.fromARGB(255, 207, 255, 244),
+                            fontFamily: 'Quicksand',
+                          ),
                         ),
                       ),
                     ),
@@ -120,6 +130,8 @@ class TransactionList extends StatelessWidget {
                     ),
                   ]),
                 );
+
+//===========================================================================================================
               },
 
               itemCount: transactions.length, //how many item to built
