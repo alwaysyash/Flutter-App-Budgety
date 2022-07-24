@@ -11,14 +11,14 @@ import 'package:intl/intl.dart';
 class TransactionList extends StatelessWidget {
   // ignore: unused_field
   final List<Transaction> transactions;
-
-  const TransactionList(this.transactions);
+  final Function deleteTX;
+  const TransactionList(this.transactions, this.deleteTX);
 
   @override
   Widget build(BuildContext context) {
     // ignore: sized_box_for_whitespace
     return Container(
-      height: 400,
+      height: 800,
       // child: SingleChildScrollView(
       //   child: Column(
       //colum size based on container
@@ -127,6 +127,15 @@ class TransactionList extends StatelessWidget {
                           ),
                         ),
                       ],
+                    ),
+                    const Spacer(),
+                    IconButton(
+                      onPressed: () {
+                        deleteTX(transactions[index].id);
+                      },
+                      icon: const Icon(Icons.delete),
+                      color: const Color.fromARGB(255, 0, 184, 166),
+                      splashColor: Colors.red,
                     ),
                   ]),
                 );

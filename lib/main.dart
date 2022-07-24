@@ -23,6 +23,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
         fontFamily: 'Quicksand',
+        primaryColor: Colors.teal,
       ),
       home: MyApp(),
     );
@@ -63,11 +64,20 @@ class _MyAppState extends State<MyApp> {
     }).toList();
   }
 
-  void _addNewTransaction(String txTitle, double txAmount) {
+  void _deleteTransaction(String id) {
+    setState(() {
+      _userTransaction.removeWhere((element) {
+        return element.id == id;
+      });
+    });
+  }
+
+  void _addNewTransaction(
+      String txTitle, double txAmount, DateTime chosenDate) {
     final newTx = Transaction(
       title: txTitle,
       amount: txAmount,
-      date: DateTime.now(),
+      date: chosenDate,
       id: DateTime.now().toString(),
     );
 
@@ -158,7 +168,7 @@ class _MyAppState extends State<MyApp> {
                     Chart(_recentTransactionsList),
               ),
 
-              TransactionList(_userTransaction),
+              TransactionList(_userTransaction, _deleteTransaction),
             ],
           ),
         ),

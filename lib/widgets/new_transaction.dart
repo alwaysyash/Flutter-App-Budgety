@@ -1,6 +1,7 @@
 //This is file for Text Inputs
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NewTransaction extends StatefulWidget {
   final Function addTx;
@@ -13,22 +14,56 @@ class NewTransaction extends StatefulWidget {
 }
 
 class _NewTransactionState extends State<NewTransaction> {
+  final titleController = TextEditingController();
+
+  final amountController = TextEditingController();
+  DateTime? _selectedDate;
   void submitData() {
+    if (amountController.text.isEmpty) {
+      return;
+    }
     final enteredTitle = titleController.text;
     final enteredAmount = double.parse(amountController.text);
-    if (enteredTitle.isEmpty || enteredAmount < 0) {
+    if (enteredTitle.isEmpty || enteredAmount < 0 || _selectedDate == null) {
       return;
     }
     widget.addTx(
       enteredTitle,
       enteredAmount,
+      _selectedDate,
     ); //call function from, user_transactions
     Navigator.of(context).pop(); //to close sheet as soon as entry is added
   }
 
-  final titleController = TextEditingController();
-
-  final amountController = TextEditingController();
+  void _datepicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2022),
+      lastDate: DateTime.now(),
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.dark().copyWith(
+            colorScheme: const ColorScheme.dark(
+              primary: Colors.teal,
+              onPrimary: Colors.black,
+              surface: Colors.teal,
+              onSurface: Colors.white,
+            ),
+            dialogBackgroundColor: const Color.fromARGB(255, 44, 44, 44),
+          ),
+          child: child!,
+        );
+      },
+    ).then((pickedDate) {
+      if (pickedDate == null) {
+        return;
+      }
+      setState(() {
+        _selectedDate = pickedDate;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,10 +111,43 @@ class _NewTransactionState extends State<NewTransaction> {
               // },
               keyboardType: TextInputType.number,
             ),
-            TextButton(
+            // ignore: sized_box_for_whitespace
+            Container(
+              height: 70,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      _selectedDate == null
+                          ? "No Date chosen!"
+                          : "Picked Date: ${DateFormat.yMMMd().format(_selectedDate!)}",
+                      style: const TextStyle(
+                        color: Colors.tealAccent,
+                        fontFamily: 'Quicksand',
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: _datepicker,
+                    style: ButtonStyle(
+                      foregroundColor:
+                          MaterialStateProperty.all(Colors.tealAccent),
+                    ),
+                    child: const Text(
+                      "Choose Date",
+                      style: TextStyle(
+                        fontFamily: 'Quicksand',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            ElevatedButton(
               onPressed: submitData,
               style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all(Colors.tealAccent),
+                backgroundColor: MaterialStateProperty.all(Colors.teal),
               ),
               child: const Text(
                 "Add Transaction",
