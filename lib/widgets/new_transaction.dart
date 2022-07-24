@@ -23,7 +23,7 @@ class _NewTransactionState extends State<NewTransaction> {
       enteredTitle,
       enteredAmount,
     ); //call function from, user_transactions
-    Navigator.of(context).pop();//to close sheet as soon as entry is added
+    Navigator.of(context).pop(); //to close sheet as soon as entry is added
   }
 
   final titleController = TextEditingController();
@@ -47,6 +47,7 @@ class _NewTransactionState extends State<NewTransaction> {
                 labelText: "Title ",
                 labelStyle: TextStyle(
                   color: Colors.tealAccent,
+                  fontFamily: 'Quicksand',
                 ),
               ),
               controller: titleController,
@@ -64,6 +65,7 @@ class _NewTransactionState extends State<NewTransaction> {
                 labelText: "Amount ",
                 labelStyle: TextStyle(
                   color: Colors.tealAccent,
+                  fontFamily: 'Quicksand',
                 ),
               ),
               controller: amountController,
@@ -79,7 +81,13 @@ class _NewTransactionState extends State<NewTransaction> {
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all(Colors.tealAccent),
               ),
-              child: const Text("Add Transaction"),
+              child: const Text(
+                "Add Transaction",
+                style: TextStyle(
+                  fontFamily: 'Quicksand',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ],
         ),

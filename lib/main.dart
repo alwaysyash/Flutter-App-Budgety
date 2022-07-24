@@ -1,10 +1,10 @@
-import 'package:flutter/gestures.dart';
 import './widgets/new_transaction.dart';
 import './widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
 import './models/transaction.dart';
 
 void main() {
+  // ignore: prefer_const_constructors
   runApp(App());
 }
 
@@ -16,6 +16,8 @@ class App extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.teal,
+        fontFamily: 'Quicksand',
+    
       ),
       home: MyApp(),
     );
@@ -31,18 +33,18 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   // late String titleInput;
   final List<Transaction> _userTransaction = [
-    Transaction(
-      id: 't1',
-      title: 'Shoes',
-      amount: 5000,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Jacket',
-      amount: 2000,
-      date: DateTime.now(),
-    ),
+    // Transaction(
+    //   id: 't1',
+    //   title: 'Shoes',
+    //   amount: 5000,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Jacket',
+    //   amount: 2000,
+    //   date: DateTime.now(),
+    // ),
   ];
 
   void _addNewTransaction(String txTitle, double txAmount) {
@@ -160,6 +162,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
-
-
