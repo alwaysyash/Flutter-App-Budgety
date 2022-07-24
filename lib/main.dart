@@ -1,7 +1,13 @@
+// ignore_for_file: prefer_const_constructors, unused_element, duplicate_ignore
+
+// ignore: unused_import
+import 'package:intl/intl.dart';
 import './widgets/new_transaction.dart';
 import './widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
 import './models/transaction.dart';
+// ignore: unused_import
+import './widgets/chart.dart';
 
 void main() {
   // ignore: prefer_const_constructors
@@ -17,7 +23,6 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
         fontFamily: 'Quicksand',
-    
       ),
       home: MyApp(),
     );
@@ -46,6 +51,17 @@ class _MyAppState extends State<MyApp> {
     //   date: DateTime.now(),
     // ),
   ];
+
+  List<Transaction> get _recentTransactionsList {
+//where can be used in list to run a function on each element
+    return _userTransaction.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
 
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = Transaction(
@@ -122,7 +138,7 @@ class _MyAppState extends State<MyApp> {
             ),
           ],
         ),
-        backgroundColor: const Color.fromARGB(255, 33, 33, 33),
+        backgroundColor: Color.fromARGB(255, 40, 40, 40),
         body: SingleChildScrollView(
           //for keyboard warning
           //can be only added at body level because
@@ -134,15 +150,12 @@ class _MyAppState extends State<MyApp> {
               // ignore: sized_box_for_whitespace
               Container(
                 width: double.infinity,
-                child: const Card(
-                  //Card depends on size of its child.
-                  //Or can be wrapped in container which can determine its size
-                  //Which is not true if wrapped in coloumn as coloumn depends on size of its child
-                  //In column can use cross axis alignment as stretch
-                  color: Colors.teal,
-                  elevation: 5,
-                  child: Text('Chart'),
-                ),
+                child:
+                    //Card depends on size of its child.
+                    //Or can be wrapped in container which can determine its size
+                    //Which is not true if wrapped in coloumn as coloumn depends on size of its child
+                    //In column can use cross axis alignment as stretch
+                    Chart(_recentTransactionsList),
               ),
 
               TransactionList(_userTransaction),

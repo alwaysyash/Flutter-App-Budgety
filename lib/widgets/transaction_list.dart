@@ -34,6 +34,9 @@ class TransactionList extends StatelessWidget {
       child: transactions.isEmpty
           ? Column(
               children: [
+                const SizedBox(
+                  height: 50,
+                ),
                 const Text(
                   'No Transaction yet!',
                   style: TextStyle(
@@ -43,7 +46,7 @@ class TransactionList extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(
-                  height: 50,
+                  height: 30,
                 ),
                 SizedBox(
                   height: 200,
@@ -58,9 +61,12 @@ class TransactionList extends StatelessWidget {
               //builder function will be called by flutter for every item
               itemBuilder: (context, index) {
                 //index is index of item to be rendered
+
                 return Card(
+                  // ignore: prefer_const_constructors
+                  margin: EdgeInsets.all(10),
                   color: const Color.fromARGB(255, 80, 80, 80),
-                  shadowColor: Colors.grey,
+                  shadowColor: Colors.black,
                   child: Row(children: [
                     // ignore: avoid_unnecessary_containers
                     Container(
