@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, prefer_typing_uninitialized_variables
 
 // ignore: unused_import
 import 'dart:ffi';
@@ -10,8 +10,9 @@ import 'package:intl/intl.dart';
 
 class Chart extends StatelessWidget {
   final List<Transaction> recentTransactions;
+  final ht;
   // ignore: prefer_const_constructors_in_immutables
-  Chart(this.recentTransactions);
+  Chart(this.recentTransactions, this.ht);
 
   List<Map<String, dynamic>> get groupedTransactions {
     //dynamic instead of Object
@@ -48,6 +49,7 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: sized_box_for_whitespace
     return Card(
       color: const Color.fromARGB(255, 80, 80, 80),
       shadowColor: Color.fromARGB(255, 0, 0, 0),
@@ -65,6 +67,7 @@ class Chart extends StatelessWidget {
             return Flexible(
               fit: FlexFit.tight,
               child: ChartBar(
+                ht,
                 (data['day']) as String,
                 (data['amount']) as double,
                 totalSpending == 0.0
