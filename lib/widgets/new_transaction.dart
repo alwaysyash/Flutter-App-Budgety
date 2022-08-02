@@ -67,97 +67,105 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: const Color.fromARGB(255, 80, 80, 80),
-      elevation: 5,
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            TextField(
-              style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                focusColor: Colors.teal,
-                labelText: "Title ",
-                labelStyle: TextStyle(
-                  color: Colors.tealAccent,
-                  fontFamily: 'Quicksand',
-                ),
-              ),
-              controller: titleController,
-              // onChanged: (val) {
-              //   titleInput = val;
-              // },
-              onSubmitted: (_) => submitData(),
-              //as this is anonymous function we need to call the function only reference is not enough
-              //to onSubmitted reference to anonymous function is passed
-            ),
-            TextField(
-              style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                focusColor: Colors.teal,
-                labelText: "Amount ",
-                labelStyle: TextStyle(
-                  color: Colors.tealAccent,
-                  fontFamily: 'Quicksand',
-                ),
-              ),
-              controller: amountController,
-              onSubmitted: (_) =>
-                  submitData(), //onSubmitted gives a string value. We dont use it but need to accept it '_'
-              // onChanged: (val) {
-              //   amountInput = val;
-              // },
-              keyboardType: TextInputType.number,
-            ),
-            // ignore: sized_box_for_whitespace
-            Container(
-              height: 70,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      _selectedDate == null
-                          ? "No Date chosen!"
-                          : "Picked Date: ${DateFormat.yMMMd().format(_selectedDate!)}",
-                      style: const TextStyle(
-                        color: Colors.tealAccent,
-                        fontFamily: 'Quicksand',
-                      ),
-                    ),
+    return SingleChildScrollView(
+      child: Card(
+        color: const Color.fromARGB(255, 80, 80, 80),
+        elevation: 5,
+        child: Container(
+          margin: const EdgeInsets.only(bottom: 50),
+          padding: EdgeInsets.only(
+            left: 10,
+            right: 10,
+            top: 10,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 10,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              TextField(
+                style: const TextStyle(color: Colors.white),
+                decoration: const InputDecoration(
+                  focusColor: Colors.teal,
+                  labelText: "Title ",
+                  labelStyle: TextStyle(
+                    color: Colors.tealAccent,
+                    fontFamily: 'Quicksand',
                   ),
-                  TextButton(
-                    onPressed: _datepicker,
-                    style: ButtonStyle(
-                      foregroundColor:
-                          MaterialStateProperty.all(Colors.tealAccent),
-                    ),
-                    child: const Text(
-                      "Choose Date",
-                      style: TextStyle(
-                        fontFamily: 'Quicksand',
-                        fontWeight: FontWeight.bold,
+                ),
+                controller: titleController,
+                // onChanged: (val) {
+                //   titleInput = val;
+                // },
+                onSubmitted: (_) => submitData(),
+                //as this is anonymous function we need to call the function only reference is not enough
+                //to onSubmitted reference to anonymous function is passed
+              ),
+              TextField(
+                style: const TextStyle(color: Colors.white),
+                decoration: const InputDecoration(
+                  focusColor: Colors.teal,
+                  labelText: "Amount ",
+                  labelStyle: TextStyle(
+                    color: Colors.tealAccent,
+                    fontFamily: 'Quicksand',
+                  ),
+                ),
+                controller: amountController,
+                onSubmitted: (_) =>
+                    submitData(), //onSubmitted gives a string value. We dont use it but need to accept it '_'
+                // onChanged: (val) {
+                //   amountInput = val;
+                // },
+                keyboardType: TextInputType.number,
+              ),
+              // ignore: sized_box_for_whitespace
+              Container(
+                height: 70,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        _selectedDate == null
+                            ? "No Date chosen!"
+                            : "Picked Date: ${DateFormat.yMMMd().format(_selectedDate!)}",
+                        style: const TextStyle(
+                          color: Colors.tealAccent,
+                          fontFamily: 'Quicksand',
+                        ),
                       ),
                     ),
-                  )
-                ],
-              ),
-            ),
-            ElevatedButton(
-              onPressed: submitData,
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.teal),
-              ),
-              child: const Text(
-                "Add Transaction",
-                style: TextStyle(
-                  fontFamily: 'Quicksand',
-                  fontWeight: FontWeight.bold,
+                    TextButton(
+                      onPressed: _datepicker,
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all(Colors.tealAccent),
+                      ),
+                      child: const Text(
+                        "Choose Date",
+                        style: TextStyle(
+                          fontFamily: 'Quicksand',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ),
-            ),
-          ],
+              ElevatedButton(
+                onPressed: submitData,
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.teal),
+                ),
+                child: const Text(
+                  "Add Transaction",
+                  style: TextStyle(
+                    fontFamily: 'Quicksand',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
