@@ -112,8 +112,9 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    final mediaQuery = MediaQuery.of(
+        context); //Better performance in same build method use same mediaQuery
+    final isLandscape = mediaQuery.orientation == Orientation.landscape;
     final appBar = AppBar(
       // backgroundColor: const Color.fromARGB(255, 0, 97, 89),
       backgroundColor: Colors.teal,
@@ -158,9 +159,9 @@ class _MyAppState extends State<MyApp> {
     );
 
     final txListWidget = Container(
-      height: (MediaQuery.of(context).size.height -
+      height: (mediaQuery.size.height -
               appBar.preferredSize.height -
-              MediaQuery.of(context).padding.top) *
+              mediaQuery.padding.top) *
           0.7,
       child: TransactionList(_userTransaction, _deleteTransaction),
     );
@@ -212,15 +213,15 @@ class _MyAppState extends State<MyApp> {
                       // ignore: sized_box_for_whitespace
 
                       Container(
-                          height: (MediaQuery.of(context).size.height -
+                          height: (mediaQuery.size.height -
                                   appBar.preferredSize.height -
-                                  MediaQuery.of(context).padding.top) *
+                                  mediaQuery.padding.top) *
                               0.3,
                           child: Chart(_recentTransactionsList,
                               appBar.preferredSize.height)),
                 ),
 
-              // MediaQuery.of(context).padding.top is for status bar
+              // mediaQuery.padding.top is for status bar
               //Deducting to remove general scrolling
 
               if (!isLandscape) txListWidget,
@@ -232,9 +233,9 @@ class _MyAppState extends State<MyApp> {
                         child:
                             // ignore: sized_box_for_whitespace
                             Container(
-                                height: (MediaQuery.of(context).size.height -
+                                height: (mediaQuery.size.height -
                                         appBar.preferredSize.height -
-                                        MediaQuery.of(context).padding.top) *
+                                        mediaQuery.padding.top) *
                                     0.7,
                                 child: Chart(_recentTransactionsList,
                                     appBar.preferredSize.height)),

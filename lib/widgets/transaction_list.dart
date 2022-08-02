@@ -132,14 +132,23 @@ class TransactionList extends StatelessWidget {
                         ],
                       ),
                       const Spacer(),
-                      IconButton(
-                        onPressed: () {
-                          deleteTX(transactions[index].id);
-                        },
-                        icon: const Icon(Icons.delete),
-                        color: const Color.fromARGB(255, 0, 184, 166),
-                        splashColor: Colors.red,
-                      ),
+                      MediaQuery.of(context).size.width > 500
+                          ? TextButton.icon(
+                              onPressed: () {
+                                deleteTX(transactions[index].id);
+                              },
+                              icon: const Icon(Icons.delete),
+                              label: const Text("Delete"),
+                              style: TextButton.styleFrom(primary: Colors.teal),
+                            )
+                          : IconButton(
+                              onPressed: () {
+                                deleteTX(transactions[index].id);
+                              },
+                              icon: const Icon(Icons.delete),
+                              color: const Color.fromARGB(255, 0, 184, 166),
+                              splashColor: Colors.red,
+                            )
                     ]),
                   );
 
